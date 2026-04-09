@@ -126,3 +126,10 @@ def calculate_change(amount_text: str, verbose: bool = False) -> ChangeResult:
     bill_count = 0
     coin_count = 0
     verification_cents = 0
+
+    for value, count in breakdown.items():
+        verification_cents += value * count
+        if DENOMINATIONS[value]["type"] == "bill":
+            bill_count += count
+        else:
+            coin_count += count
