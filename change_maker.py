@@ -133,3 +133,21 @@ def calculate_change(amount_text: str, verbose: bool = False) -> ChangeResult:
             bill_count += count
         else:
             coin_count += count
+
+    return cast(
+        ChangeResult,
+        {
+            "ok": True,
+            "cents": cents,
+            "amount": parsed["dollars"],
+            "rounded": parsed["rounded"],
+            "breakdown": breakdown,
+            "trace": trace,
+            "bill_count": bill_count,
+            "coin_count": coin_count,
+            "verification": verification_cents / 100,
+            "used_denominations": used_denominations,
+            "unused_denominations": unused_denominations,
+            "message": "",
+        },
+    )
