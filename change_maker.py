@@ -121,3 +121,8 @@ def calculate_change(amount_text: str, verbose: bool = False) -> ChangeResult:
                 )
             )
         remaining = leftover
+    
+    unused_denominations = set(DENOMINATIONS.keys()) - used_denominations
+    bill_count = 0
+    coin_count = 0
+    verification_cents = 0
