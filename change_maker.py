@@ -94,3 +94,8 @@ def calculate_change(amount_text: str, verbose: bool = False) -> ChangeResult:
                 "message": "Zero dollars means there is no change to hand back.",
             },
         )
+
+    remaining = cents
+    breakdown: dict[int, int] = {}
+    trace: list[GreedyTraceStep] = []
+    used_denominations: set[int] = set()
