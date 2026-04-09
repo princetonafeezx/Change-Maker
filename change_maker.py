@@ -27,3 +27,14 @@ def parse_amount_to_cents(amount_text: str) -> ParsedAmountToCents:
 
     had_dollar_symbol = "$" in original
     cleaned = original.replace("$", "").replace(",", "").strip()
+
+    if cleaned.startswith("+"):
+        cleaned = cleaned[1:].strip()
+    if cleaned.startswith("-"):
+        raise ValueError("Negative amounts are not allowed for change making.")
+    if not cleaned:
+        raise ValueError("Please enter an amount.")
+    if "e" in cleaned.lower():
+        raise ValueError(
+            "Scientific notation is not supported. Use a plain amount like 14.73 or $14.73."
+        )
