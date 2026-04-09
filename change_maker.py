@@ -70,3 +70,7 @@ def parse_amount_to_cents(amount_text: str) -> ParsedAmountToCents:
             "rounded": rounded_happened,
         },
     )
+
+def calculate_change(amount_text: str, verbose: bool = False) -> ChangeResult:
+    parsed = parse_amount_to_cents(amount_text)
+    cents = parsed["cents"]
