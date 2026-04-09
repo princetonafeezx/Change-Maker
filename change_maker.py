@@ -38,3 +38,26 @@ def parse_amount_to_cents(amount_text: str) -> ParsedAmountToCents:
         raise ValueError(
             "Scientific notation is not supported. Use a plain amount like 14.73 or $14.73."
         )
+    try:
+        if "." in cleaned:
+            decimal_amount = Decimal(cleaned)
+            rounded = decimal_amount.quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
+            cents = int(rounded * 100)
+            rounded_happened = decimal_amount != rounded
+            dollars = float(rounded)
+        elif cleaned.isdigit():
+            if had_dollar_symbol or len(cleaned) <= 2:
+                decimal_amount = Decimal(cleaned)
+                rounded = decimal_amount.quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
+                cents = int(rounded * 100)
+                rounded_happened = False
+                dollars = float(rounded)
+            else:
+                cents = int(cleaned)
+                rounded_happened = False
+                dollars = cents / 100
+        else:
+            raise ValueError
+    except (InvalidOperation, ValueError):
+        raise ValueError("That amount was not numeric. Try formats like 14.73, $14.73, or 1473.") from None
+    
