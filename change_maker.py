@@ -196,3 +196,14 @@ def print_change_result(result: ChangeResult, verbose: bool = False) -> None:
     print(f"Total coins used: {result['coin_count']}")
     print(f"Verification: {format_money(result['verification'])} adds back to the original amount.")
     print(f"Unused denominations this time: {', '.join(DENOMINATIONS[value]['name'] for value in sorted(result['unused_denominations'], reverse=True))}")
+
+    if verbose and result["trace"]:
+        print()
+        print("Greedy trace")
+        print(f"{'Step':<4}{'Denomination':<18}{'Before':>10}{'Used':>8}{'Left':>10}")
+        print("-" * 60)
+        for index, step in enumerate(result["trace"], start=1):
+            before = format_money(step["before"] / 100)
+            after = format_money(step["after"] / 100)
+            print(f"{index:<4}{step['name']:<18}{before:>10}{step['count']:>8}{after:>10}")
+
