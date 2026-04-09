@@ -60,4 +60,13 @@ def parse_amount_to_cents(amount_text: str) -> ParsedAmountToCents:
             raise ValueError
     except (InvalidOperation, ValueError):
         raise ValueError("That amount was not numeric. Try formats like 14.73, $14.73, or 1473.") from None
-    
+
+    return cast(
+        ParsedAmountToCents,
+        {
+            "input_text": original,
+            "cents": cents,
+            "dollars": dollars,
+            "rounded": rounded_happened,
+        },
+    )
