@@ -190,3 +190,9 @@ def print_change_result(result: ChangeResult, verbose: bool = False) -> None:
             continue
         count = result["breakdown"][value]
         print(f"{DENOMINATIONS[value]['name']:<18}{count:>8}{format_money((value * count) / 100):>16}")
+
+    print()
+    print(f"Total bills used: {result['bill_count']}")
+    print(f"Total coins used: {result['coin_count']}")
+    print(f"Verification: {format_money(result['verification'])} adds back to the original amount.")
+    print(f"Unused denominations this time: {', '.join(DENOMINATIONS[value]['name'] for value in sorted(result['unused_denominations'], reverse=True))}")
