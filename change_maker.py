@@ -159,3 +159,11 @@ def print_denomination_info() -> None:
         info = DENOMINATIONS[value]
         display_value = format_money(value / 100)
         print(f"{display_value:<10}{info['name']:<14}{info['type']}")
+
+def print_change_result(result: ChangeResult, verbose: bool = False) -> None:
+    if result["message"]:
+        print(result["message"])
+        return
+
+    if result["rounded"]:
+        print("Note: the input was rounded to the nearest cent before processing.")
