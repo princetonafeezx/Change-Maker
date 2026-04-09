@@ -74,3 +74,23 @@ def parse_amount_to_cents(amount_text: str) -> ParsedAmountToCents:
 def calculate_change(amount_text: str, verbose: bool = False) -> ChangeResult:
     parsed = parse_amount_to_cents(amount_text)
     cents = parsed["cents"]
+
+
+    if cents == 0:
+        return cast(
+            ChangeResult,
+            {
+                "ok": True,
+                "cents": 0,
+                "amount": 0.0,
+                "rounded": parsed["rounded"],
+                "breakdown": {},
+                "trace": [],
+                "bill_count": 0,
+                "coin_count": 0,
+                "verification": 0.0,
+                "used_denominations": set[int](),
+                "unused_denominations": set(DENOMINATIONS.keys()),
+                "message": "Zero dollars means there is no change to hand back.",
+            },
+        )
