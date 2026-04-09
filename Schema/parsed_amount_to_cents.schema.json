@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "parsed_amount_to_cents.schema.json",
+  "title": "ParsedAmountToCents",
+  "description": "Return shape of change_maker.parse_amount_to_cents().",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "input_text": {
+      "type": "string"
+    },
+    "cents": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "dollars": {
+      "type": "number",
+      "minimum": 0
+    },
+    "rounded": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "input_text",
+    "cents",
+    "dollars",
+    "rounded"
+  ]
+}

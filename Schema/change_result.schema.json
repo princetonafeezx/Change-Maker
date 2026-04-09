@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "change_result.schema.json",
+  "title": "ChangeResult",
+  "description": "Successful return shape of change_maker.calculate_change(). Python set fields are modeled as arrays because JSON has no native set type.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "ok": {
+      "type": "boolean",
+      "const": true
+    },
+    "cents": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "amount": {
+      "type": "number",
+      "minimum": 0
+    },
+    "rounded": {
+      "type": "boolean"
+    },
+    "breakdown": {
+      "type": "object",
+      "description": "Map of denomination value in cents to count used. Keys are strings in JSON.",
+      "propertyNames": {
+        "pattern": "^(10000|5000|2000|1000|500|100|25|10|5|1)$"
+      },
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 1
+      },
+      "examples": [
+        {
+          "1000": 1,
+          "25": 2,
+          "10": 2,
+          "1": 3
+        }
+      ]
+    },
+    "trace": {
+      "type": "array",
+      "items": {
+        "$ref": "./greedy_trace_step.schema.json"
+      },
+      "default": []
+    },
+    "bill_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "coin_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "verification": {
+      "type": "number",
+      "minimum": 0
+    },
+    "used_denominations": {
+      "type": "array",
+      "description": "Serialized form of a Python set[int].",
+      "items": {
+        "type": "integer",
+        "enum": [
+          10000,
+          5000,
+          2000,
+          1000,
+          500,
+          100,
+          25,
+          10,
+          5,
+          1
+        ]
+      },
+      "uniqueItems": true,
+      "default": []
+    },
+    "unused_denominations": {
+      "type": "array",
+      "description": "Serialized form of a Python set[int].",
+      "items": {
+        "type": "integer",
+        "enum": [
+          10000,
+          5000,
+          2000,
+          1000,
+          500,
+          100,
+          25,
+          10,
+          5,
+          1
+        ]
+      },
+      "uniqueItems": true
+    },
+    "message": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "ok",
+    "cents",
+    "amount",
+    "rounded",
+    "breakdown",
+    "trace",
+    "bill_count",
+    "coin_count",
+    "verification",
+    "used_denominations",
+    "unused_denominations",
+    "message"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "categorized_transactions_file.schema.json",
+  "title": "CategorizedTransactionsFile",
+  "description": "JSON representation of the categorized transaction rows that storage.py reads from or writes to CSV.",
+  "type": "array",
+  "items": {
+    "$ref": "./categorized_record.schema.json"
+  }
+}

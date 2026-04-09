@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "greedy_trace_step.schema.json",
+  "title": "GreedyTraceStep",
+  "description": "One step in the greedy denomination-selection trace.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "denomination": {
+      "type": "integer",
+      "enum": [
+        10000,
+        5000,
+        2000,
+        1000,
+        500,
+        100,
+        25,
+        10,
+        5,
+        1
+      ]
+    },
+    "name": {
+      "type": "string"
+    },
+    "before": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "after": {
+      "type": "integer",
+      "minimum": 0
+    }
+  },
+  "required": [
+    "denomination",
+    "name",
+    "before",
+    "count",
+    "after"
+  ]
+}
