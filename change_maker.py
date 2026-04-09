@@ -18,3 +18,12 @@ DENOMINATIONS: dict[int, dict[str, str]] = {
     5: {"name": "nickel", "type": "coin"},
     1: {"name": "penny", "type": "coin"},
 }
+
+def parse_amount_to_cents(amount_text: str) -> ParsedAmountToCents:
+
+    original = (amount_text or "").strip()
+    if not original:
+        raise ValueError("Please enter an amount.")
+
+    had_dollar_symbol = "$" in original
+    cleaned = original.replace("$", "").replace(",", "").strip()
