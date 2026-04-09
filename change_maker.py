@@ -173,3 +173,9 @@ def print_change_result(result: ChangeResult, verbose: bool = False) -> None:
     print("Bills")
     print(f"{'Denomination':<18}{'Count':>8}{'Subtotal':>16}")
     print("-" * 48)
+
+    for value in sorted(result["breakdown"], reverse=True):
+        if DENOMINATIONS[value]["type"] != "bill":
+            continue
+        count = result["breakdown"][value]
+        print(f"{DENOMINATIONS[value]['name']:<18}{count:>8}{format_money((value * count) / 100):>16}")
