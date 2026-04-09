@@ -207,3 +207,6 @@ def print_change_result(result: ChangeResult, verbose: bool = False) -> None:
             after = format_money(step["after"] / 100)
             print(f"{index:<4}{step['name']:<18}{before:>10}{step['count']:>8}{after:>10}")
 
+def menu() -> None:
+    verbose = True
+    valid_choices = {"1", "2", "3", "4"}
