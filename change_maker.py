@@ -210,3 +210,35 @@ def print_change_result(result: ChangeResult, verbose: bool = False) -> None:
 def menu() -> None:
     verbose = True
     valid_choices = {"1", "2", "3", "4"}
+
+    while True:
+        print()
+        print("LedgerLogic: Optimal Change Calculator")
+        print("1. Calculate change")
+        print("2. Toggle verbose mode")
+        print("3. View denomination info")
+        print("4. Quit")
+        choice = input("Choose an option: ").strip()
+        if choice not in valid_choices:
+            print("Please pick one of the listed menu options.")
+            continue
+
+        if choice == "1":
+            amount_text = input("Amount: ").strip()
+            try:
+                result = calculate_change(amount_text, verbose=verbose)
+                print_change_result(result, verbose=verbose)
+            except ValueError as error:
+                print(error)
+
+        elif choice == "2":
+            verbose = not verbose
+            mode = "verbose" if verbose else "quiet"
+            print(f"Mode is now {mode}.")
+
+        elif choice == "3":
+            print_denomination_info()
+
+        elif choice == "4":
+            print("Exiting change maker.")
+            break
