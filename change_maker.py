@@ -99,3 +99,25 @@ def calculate_change(amount_text: str, verbose: bool = False) -> ChangeResult:
     breakdown: dict[int, int] = {}
     trace: list[GreedyTraceStep] = []
     used_denominations: set[int] = set()
+    
+    for value in sorted(DENOMINATIONS, reverse=True):
+        info = DENOMINATIONS[value]
+        count = remaining // value
+        leftover = remaining % value
+        if count:
+            breakdown[value] = count
+            used_denominations.add(value)
+        if verbose:
+            trace.append(
+                cast(
+                    GreedyTraceStep,
+                    {
+                        "denomination": value,
+                        "name": info["name"],
+                        "before": remaining,
+                        "count": int(count),
+                        "after": int(leftover),
+                    },
+                )
+            )
+        remaining = leftover
