@@ -151,3 +151,11 @@ def calculate_change(amount_text: str, verbose: bool = False) -> ChangeResult:
             "message": "",
         },
     )
+
+def print_denomination_info() -> None:
+    print("Supported denominations")
+    print("-" * 40)
+    for value in sorted(DENOMINATIONS, reverse=True):
+        info = DENOMINATIONS[value]
+        display_value = format_money(value / 100)
+        print(f"{display_value:<10}{info['name']:<14}{info['type']}")
