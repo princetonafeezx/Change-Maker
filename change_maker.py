@@ -167,3 +167,9 @@ def print_change_result(result: ChangeResult, verbose: bool = False) -> None:
 
     if result["rounded"]:
         print("Note: the input was rounded to the nearest cent before processing.")
+
+    print(f"Change for {format_money(result['amount'])}")
+    print("-" * 48)
+    print("Bills")
+    print(f"{'Denomination':<18}{'Count':>8}{'Subtotal':>16}")
+    print("-" * 48)
