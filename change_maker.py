@@ -242,3 +242,10 @@ def menu() -> None:
         elif choice == "4":
             print("Exiting change maker.")
             break
+
+def main() -> None:
+    menu()
+
+
+if __name__ == "__main__":
+    main()
